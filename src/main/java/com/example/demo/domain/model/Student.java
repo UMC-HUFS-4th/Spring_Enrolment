@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Entity // 엔티티는 기본생성자가 필요험. 따라서 위 ArgsConstructor 어노테이션 사용
 public class Student {
 
-    @OneToMany
+    //@OneToMany
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
