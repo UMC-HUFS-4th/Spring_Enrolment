@@ -25,7 +25,7 @@ public class Student {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    private String student_num; // 학번(로그인시 아이디로 사용)
+    private String studentNum; // 학번(로그인시 아이디로 사용)
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
@@ -35,9 +35,9 @@ public class Student {
     @LastModifiedDate // 엔티티가 마지막으로 수정된 시간이 자동으로 저장
     private LocalDateTime modifiedDate; // 계정 수정날짜
     @Column(nullable = false)
-    private int max_credit;
+    private int maxCredit;
     @Column(nullable = false)
-    private int cur_credit;
+    private int curCredit;
     @Column(nullable = false)
     private String major;
 
