@@ -28,7 +28,7 @@ public class Student {
     private String studentNum; // 학번(로그인시 아이디로 사용)
     @Column(nullable = false)
     private String password;
-//    @Column(nullable = false)
+//    @Column(nullable = false) // null값을 허용안함으로 하면 500에러 발생(DTO에서 설정을 안해주기 때문)
     private int grade;
     @CreatedDate  // 엔티티가 생성되어 저장될 때 시간이 자동으로 저장
     private LocalDateTime createdDate; // 계정 생성날짜
