@@ -17,6 +17,7 @@ public class StudentDto {
         return StudentDto.builder()
                 .name(student.getName())
                 .studentNum(student.getStudentNum())
+                .password(student.getPassword())
                 .maxCredit(student.getMaxCredit())
                 .curCredit(student.getCurCredit())
                 .build();

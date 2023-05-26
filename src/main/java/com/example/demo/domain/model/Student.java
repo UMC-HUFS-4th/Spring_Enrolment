@@ -28,7 +28,7 @@ public class Student {
     private String studentNum; // 학번(로그인시 아이디로 사용)
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private int grade;
     @CreatedDate  // 엔티티가 생성되어 저장될 때 시간이 자동으로 저장
     private LocalDateTime createdDate; // 계정 생성날짜
@@ -38,11 +38,11 @@ public class Student {
     private int maxCredit;
     @Column(nullable = false)
     private int curCredit;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String major;
 
-    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY) // EAGER를 사용할 경우 연관된 객체를 모두 한번에 가져오기 때문에 개발자가 원하지 않는 Query가 DB에 날라갈 수 있음.
-    private List<Registration> registrations = new ArrayList<>();
+//    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY) // EAGER를 사용할 경우 연관된 객체를 모두 한번에 가져오기 때문에 개발자가 원하지 않는 Query가 DB에 날라갈 수 있음.
+//    private List<Registration> registrations = new ArrayList<>();
 
 
 }
