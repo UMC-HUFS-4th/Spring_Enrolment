@@ -6,15 +6,15 @@ import lombok.Data;
 
 @Data
 @Builder
-public class studentDto {
+public class StudentDto {
     private String name;
     private String studentNum;
     private String password;
     private int maxCredit;
     private int curCredit;
 
-    public static studentDto from(Student student) {
-        return studentDto.builder()
+    public static StudentDto from(Student student) {
+        return StudentDto.builder()
                 .name(student.getName())
                 .studentNum(student.getStudentNum())
                 .maxCredit(student.getMaxCredit())
