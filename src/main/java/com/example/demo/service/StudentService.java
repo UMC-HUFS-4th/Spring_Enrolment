@@ -6,6 +6,9 @@ import com.example.demo.dto.StudentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor // RequiredArgConstructor은 꼭 초기화가 되어야하는 생성자를 만들어줌. final 사용할때 사용
 //@Transactional
 @Service
@@ -39,4 +42,12 @@ public class StudentService {
         }
     }
 
+    // 필요는 없을거같지만 회원가입한 회원들이 올바르게 들어가 있나 확인하기위해서 작성해놓음( Get요청으로 확인해보려고)
+    public List<StudentDto> getAllStudents() {
+        List<Student> students = studentRepository.findAll();
+        List<StudentDto> studentDtos = students.stream()
+                .map(StudentDto::from)
+                .collect(Collectors.toList());
+        return studentDtos;
+    }
 }
