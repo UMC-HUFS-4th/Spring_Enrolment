@@ -4,10 +4,13 @@ import com.example.demo.domain.model.Student;
 import com.example.demo.domain.repository.StudentRepository;
 import com.example.demo.dto.StudentDto;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+
 
 @RequiredArgsConstructor // RequiredArgConstructor은 꼭 초기화가 되어야하는 생성자를 만들어줌. final 사용할때 사용
 //@Transactional
@@ -15,12 +18,13 @@ import java.util.stream.Collectors;
 public class StudentService {
     private final StudentRepository studentRepository; // StudentRepository 의존성 추가
 
+
     public void register(StudentDto studentDto) {
         // StudentDto를 이용하여 회원가입 정보를 생성하고 저장
         Student student = Student.builder()
                 .name(studentDto.getName())
                 .studentNum(studentDto.getStudentNum())
-                .password(studentDto.getPassword())
+                .password(studentDto.getPassword()) // 평문으로 저장
                 .maxCredit(studentDto.getMaxCredit())
                 .curCredit(studentDto.getCurCredit())
                 .build();
@@ -33,7 +37,7 @@ public class StudentService {
         // 주어진 학번과 비밀번호로 학생을 조회합니다.
         Student student = studentRepository.findByStudentNum(studentNum);
 
-        if (student != null && student.getPassword().equals(password)) {
+        if (student != null && password.equals(student.getPassword())) {
             // 학생이 존재하고 비밀번호가 일치하면 로그인 성공
             return true;
         } else {
