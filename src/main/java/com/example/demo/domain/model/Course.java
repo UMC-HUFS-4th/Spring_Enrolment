@@ -15,13 +15,14 @@ import java.util.List;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long courseId;
-    private String courseTime;
-    private String courseRoomNum;
-    private String professorName;
-    private int point;
-    private int maxStudentNum;
-    private int curStudentNum;
+    private Long courseId;          // key
+    private String courseName;      // 과목명
+    private String courseTime;      // 강의시간
+    private String courseRoomNum;   // 강의실
+    private String professorName;   // 교수명
+    private int point;              // 학점수
+    private int maxStudentNum;      // 정원
+    private int curStudentNum;      // 신청인원
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     private List<Registration> registrations = new ArrayList<>();
