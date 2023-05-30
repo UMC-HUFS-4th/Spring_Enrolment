@@ -1,15 +1,15 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.model.Course;
+import com.example.demo.domain.model.Registration;
 import com.example.demo.domain.model.Student;
 import com.example.demo.domain.repository.CourseRepository;
-import com.example.demo.domain.repository.EnrollmentRepository;
+import com.example.demo.domain.repository.RegistrationRepository;
 import com.example.demo.domain.repository.StudentRepository;
-import com.example.demo.service.EnrollmentService;
+import com.example.demo.service.RegistrationService;
 import com.sun.istack.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.Parameter;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -19,12 +19,11 @@ import java.awt.print.Pageable;
 @RequestMapping
 @RequiredArgsConstructor
 @Transactional
-public class EnrollmentController {
-    private final EnrollmentService enrollmentService;
+public class RegistrationController {
 
-    private final EnrollmentRepository enrollmentRepository;
     private final StudentRepository studentRepository;
     private final CourseRepository courseRepository;
+    private com.example.demo.domain.model.Registration Registration;
 
     @PermitStudent
     @PostMapping("/enroll")
@@ -50,7 +49,7 @@ public class EnrollmentController {
         Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
                 .orElseThrow(NoExistEntityException::new);
 
-        enrollmentService.drop(student, enrollment);
+        enrollmentService.drop(student, Registration);
     }
 
     @PermitAnyLogin
