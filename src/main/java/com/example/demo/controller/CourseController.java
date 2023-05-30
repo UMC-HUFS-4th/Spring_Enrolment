@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.model.Course;
 import com.example.demo.domain.repository.CourseRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,10 +11,10 @@ import java.util.List;
 public class CourseController {
     private final CourseRepository courseRepository;
 
-    @Autowired
     public CourseController(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }
+
 
     // 모든 과목 조회
     @GetMapping
