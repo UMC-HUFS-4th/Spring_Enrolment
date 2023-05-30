@@ -40,7 +40,11 @@ public class Student {
     private String major;
 
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY) // EAGER를 사용할 경우 연관된 객체를 모두 한번에 가져오기 때문에 개발자가 원하지 않는 Query가 DB에 날라갈 수 있음.
+<<<<<<< HEAD
     private List<Enrollment> registrations = new ArrayList<>();
+=======
+    private List<Registration> registrations = new ArrayList<>();
+>>>>>>> 5bb41efe0f0a2b60b3f2d9482bc968541d9ff0dc
 
 
 }
