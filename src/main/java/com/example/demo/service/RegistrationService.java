@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.domain.model.Course;
 import com.example.demo.domain.model.Registration;
 import com.example.demo.domain.model.Student;
 import com.example.demo.domain.repository.RegistrationRepository;
@@ -11,17 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 public class RegistrationService {
-    private Registration enroll(Student student, Course course) {
+    public static Registration enroll(Student student, Course course) {
 
         if (isFullCapacity(course))
             throw new RuntimeException("코스 인원이 꽉 찼습니다. 수강신청할 수 없습니다.");
         if (isDuplicatedTime(student, course))throw new RuntimeException("신청한 과목의 수업시간이 기존 시간표와 중복됩니다");
         if (isDuplicatedEnroll(student, course))
-            throw new RuntimeException("이미 수강한 과목입니다, 재수강은 B0 미만만 가능합니다");
-        if(isNotQualified(student, course))
-            throw new RuntimeException("수강 금지과입니다");
+            throw new RuntimeException("이미 수강한 과목입니다");
 
-        List<Registration> enrollments = enrollmentRepository.findAllByStudent(student);
+        List<Registration> enrollments = RegistrationRepository.findAllByStudent(student);
         if (isDuplicatedOnSemesterEnroll(course, enrollments))
             throw new RuntimeException("이미 신청한 과목입니다");
 
@@ -30,10 +29,10 @@ public class RegistrationService {
                 .course(course)
                 .build();
 
-        return enrollmentRepository.save(registration);
+        return RegistrationRepository.save(registration);
     }
 
-    public void drop(Student student, Registration registration) {
+    public static void drop(Student student, Registration registration) {
         if (!student.equals(registration.getStudent()))
             throw new NotAuthorizedException();
 
@@ -64,7 +63,7 @@ public class RegistrationService {
         return cnt >= course.getCapacity();
     }
 
-    private boolean isDuplicatedOnSemesterEnroll(Course course, List<Registration> enrollments) {
+    private static boolean isDuplicatedOnSemesterEnroll(Course course, List<Registration> enrollments) {
         return enrollments.stream()
                 .filter(Registration::isOnSemester)
                 .map(e -> e.getCourse().getSubject().getCode())
@@ -74,7 +73,6 @@ public class RegistrationService {
     private boolean isDuplicatedEnroll(Student student, Course course) {
         return student.getEnrollments().stream()
                 .filter(e -> e.getCourse().getSubject().getCode().equals(course.getSubject().getCode()))
-                .filter(e -> !e.isOnSemester())
-                .anyMatch(e -> e.getScoreType().getDigit() >= ScoreType.B_ZERO.getDigit());
+                .filter(e -> !e.isOnSemester());
     }
 }
