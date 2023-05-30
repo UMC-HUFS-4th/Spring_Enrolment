@@ -13,7 +13,7 @@ import java.util.List;
 public interface RegistrationRepository extends JpaRepository<Registration, Long> {
     Long countAllByCourse(Course course);
 
-    List<Registration> findAllByStudent(Student student);
+    static List<Registration> findAllByStudent(Student student);
 
     Page<Registration> findAllByStudnetAndOnSemesterFalse(Student student, Pageable pageable);
 

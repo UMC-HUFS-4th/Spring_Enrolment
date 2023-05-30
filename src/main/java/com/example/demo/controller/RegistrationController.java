@@ -10,7 +10,7 @@ import com.example.demo.service.RegistrationService;
 import com.sun.istack.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.Parameter;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;annotation
 
 import javax.transaction.Transactional;
 import java.awt.print.Pageable;
@@ -34,7 +34,7 @@ public class RegistrationController {
         Student student = studentRepository.findById(studentId).orElseThrow(NoExistEntityException::new);
         Course course = courseRepository.findById(courseId).orElseThrow(NoExistEntityException::new);
 
-        enrollmentService.enroll(student, course);
+        RegistrationService.enroll(student, course);
     }
 
     @PermitStudent
@@ -46,32 +46,32 @@ public class RegistrationController {
     ) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(NoExistEntityException::new);
-        Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
+        Registration registration = RegistrationRepository.findById(enrollmentId)
                 .orElseThrow(NoExistEntityException::new);
 
-        enrollmentService.drop(student, Registration);
+        RegistrationService.drop(student, Registration);
     }
 
     @PermitAnyLogin
     @PostMapping("/not-semester/student")
     @valid
-    public Page<NotSemesterEnrollmentResponse> notSemesterEnrollments(
+    public Page<NotSemesterRegistrationResponse> notSemesterEnrollments(
             @Parameter(hidden = true) @SessionAttribute(name = SessionConst.LOGIN_STUDENT, required = false) Long studentId,
             Pageable pageable) {
         Student student = studentRepository.findById(studentId).orElseThrow(NoExistEntityException::new);
-        return enrollmentRepository.findAllByStudentAndOnSemesterFalse(student, pageable)
-                .map(NotSemesterEnrollmentResponse::new);
+        return RegistrationRepository.findAllByStudentAndOnSemesterFalse(student, pageable)
+                .map(NotSemesterRegistrationResponse::new);
     }
 
     @PermitAnyLogin
     @PostMapping("/on-semester/student")
-    public Page<OnSemesterEnrollmentResponse> onSemesterEnrollments(
+    public Page<OnSemesterRegistrationResponse> onSemesterEnrollments(
             @Parameter(hidden = true) @SessionAttribute(name = SessionConst.LOGIN_STUDENT, required = false) Long studentId,
             Pageable pageable) {
         Student student = studentRepository.findById(studentId).orElseThrow(NoExistEntityException::new);
 
-        return enrollmentRepository.findAllByStudentAndOnSemesterTrue(student, pageable)
-                .map(OnSemesterEnrollmentResponse::new);
+        return RegistrationRepository.findAllByStudentAndOnSemesterTrue(student, pageable)
+                .map(OnSemesterRegistrationResponse::new);
     }
 
 }
