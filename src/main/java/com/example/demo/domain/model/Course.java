@@ -1,5 +1,6 @@
 package com.example.demo.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,5 +26,6 @@ public class Course {
     private int curStudentNum;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Registration> registrations = new ArrayList<>();
 }

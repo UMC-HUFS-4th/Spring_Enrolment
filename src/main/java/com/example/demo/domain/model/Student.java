@@ -1,9 +1,7 @@
 package com.example.demo.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -14,6 +12,7 @@ import java.util.List;
 
 @Getter
 @Builder
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity // 엔티티는 기본생성자가 필요험. 따라서 위 ArgsConstructor 어노테이션 사용
@@ -43,5 +42,6 @@ public class Student {
 
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     // EAGER를 사용할 경우 연관된 객체를 모두 한번에 가져오기 때문에 개발자가 원하지 않는 Query가 DB에 날라갈 수 있음.
+    @JsonIgnore
     private List<Registration> registrations = new ArrayList<>();
 }
