@@ -39,6 +39,7 @@ public class CourseController {
     public Course updateCourse(@PathVariable Long courseId, @RequestBody Course updatedCourse) {
         Course course = courseRepository.findById(courseId).orElse(null);
         if (course != null) {
+            course.setCourseName(updatedCourse.getCourseName());
             course.setCourseTime(updatedCourse.getCourseTime());
             course.setCourseRoomNum(updatedCourse.getCourseRoomNum());
             course.setProfessorName(updatedCourse.getProfessorName());
