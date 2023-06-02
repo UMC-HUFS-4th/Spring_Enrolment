@@ -29,7 +29,7 @@ public class CourseController {
     }
 
     // 과목 추가
-    @PostMapping("/open")
+    @PostMapping("/add")
     public Course addCourse(@RequestBody Course course) {
         return courseRepository.save(course);
     }
