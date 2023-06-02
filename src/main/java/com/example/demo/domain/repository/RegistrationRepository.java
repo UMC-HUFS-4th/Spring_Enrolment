@@ -11,13 +11,5 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface RegistrationRepository extends JpaRepository<Registration, Long> {
-    Long countAllByCourse(Course course);
 
-    static List<Registration> findAllByStudent(Student student);
-
-    Page<Registration> findAllByStudnetAndOnSemesterFalse(Student student, Pageable pageable);
-
-    Page<Registration> FindAllByStudentAndOnSemesterTrue(Student student, Pageable pageable);
-
-//    @Query("select e from Registration e join e.course c where e.onSemester = TRUE")
 }

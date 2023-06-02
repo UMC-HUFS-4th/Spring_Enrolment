@@ -23,19 +23,19 @@ public class CourseController {
     }
 
     // 특정 과목 조회
-    @GetMapping("/{courseId}")
+    @GetMapping("/get/{courseId}")
     public Course getCourseById(@PathVariable Long courseId) {
         return courseRepository.findById(courseId).orElse(null);
     }
 
     // 과목 추가
-    @PostMapping
+    @PostMapping("/add")
     public Course addCourse(@RequestBody Course course) {
         return courseRepository.save(course);
     }
 
     // 과목 수정
-    @PutMapping("/{courseId}")
+    @PutMapping("/update/{courseId}")
     public Course updateCourse(@PathVariable Long courseId, @RequestBody Course updatedCourse) {
         Course course = courseRepository.findById(courseId).orElse(null);
         if (course != null) {
@@ -52,7 +52,7 @@ public class CourseController {
     }
 
     // 과목 삭제
-    @DeleteMapping("/{courseId}")
+    @DeleteMapping("/delete/{courseId}")
     public void deleteCourse(@PathVariable Long courseId) {
         courseRepository.deleteById(courseId);
     }
