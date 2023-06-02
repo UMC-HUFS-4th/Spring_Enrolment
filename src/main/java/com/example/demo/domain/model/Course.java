@@ -1,5 +1,6 @@
 package com.example.demo.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ import java.util.List;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long courseId;          // key
     private String courseName;      // 과목명
     private String courseTime;      // 강의시간
@@ -24,6 +26,8 @@ public class Course {
     private int maxStudentNum;      // 정원
     private int curStudentNum;      // 신청인원
 
+
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Registration> registrations = new ArrayList<>();
 }
