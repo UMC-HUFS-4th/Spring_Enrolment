@@ -1,6 +1,7 @@
 package com.example.demo.domain.model;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,5 +25,11 @@ public class Registration {
     @JoinColumn(name = "course_id")
     private Course course;
 
+    @CreatedDate
     private LocalDateTime registrationDate;
+
+    @PrePersist
+    public void prePersist() {
+        registrationDate = LocalDateTime.now();
+    }
 }
