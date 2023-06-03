@@ -12,6 +12,8 @@ public class StudentDto {
     private String password;
     private int maxCredit;
     private int curCredit;
+    private String major;
+    private int grade;
 
     public static StudentDto from(Student student) {
         return StudentDto.builder()
@@ -20,6 +22,8 @@ public class StudentDto {
                 .password(student.getPassword())
                 .maxCredit(student.getMaxCredit())
                 .curCredit(student.getCurCredit())
+                .major(student.getMajor())
+                .grade(student.getGrade())
                 .build();
     }
 }
