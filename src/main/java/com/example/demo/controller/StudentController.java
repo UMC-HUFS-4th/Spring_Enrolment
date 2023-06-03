@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.model.Student;
 import com.example.demo.dto.StudentDto;
 import com.example.demo.service.StudentService;
 import org.springframework.http.HttpStatus;
@@ -20,7 +19,7 @@ public class StudentController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerStudent(@RequestPart StudentDto studentDto) {
+    public ResponseEntity<String> registerStudent(@RequestBody StudentDto studentDto) {
         studentService.register(studentDto);
         return ResponseEntity.ok("Student registered successfully.");
     }
